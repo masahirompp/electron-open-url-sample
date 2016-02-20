@@ -1,0 +1,8 @@
+{
+  "name": "myapp",
+  "version": "0.1.0",
+  "description": "electron open url sample",
+  "main": "app/main.js",
+  "author": "masahirompp",
+  "license": "MIT"
+}

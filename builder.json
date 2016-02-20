@@ -1,0 +1,17 @@
+{
+  "osx" : {
+    "title": "MyApp",
+    "background": "resources/osx/installer.png",
+    "icon": "resources/osx/mount.icns",
+    "icon-size": 80,
+    "contents": [
+      { "x": 350, "y": 150, "type": "link", "path": "/Applications" },
+      { "x": 150, "y": 150, "type": "file" }
+    ]
+  },
+  "win" : {
+    "title" : "MyApp",
+    "icon" : "resources/win/icon.ico",
+    "nsiTemplate" : "resources/win/installer.nsi.tpl"
+  }
+}

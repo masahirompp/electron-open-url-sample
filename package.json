@@ -1,0 +1,50 @@
+{
+  "name": "electron-open-url-sample",
+  "version": "0.1.0",
+  "description": "electron open url sample.",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dtsm": "dtsm",
+    "setup": "rm -Rf app dist node_modules typings && npm install && dtsm install",
+    "clean": "rm -Rf app dist",
+    "build": "npm run clean && webpack --debug",
+    "build:dist": "npm run clean && webpack --config webpack.config.dist.js",
+    "watch": "npm run clean && webpack --debug --watch",
+    "prepack": "npm run build:dist && mkdir dist && cp -rf app dist/app && cp resources/package.json dist",
+    "pack": "npm run pack:osx && npm run pack:win32 && npm run pack:win64",
+    "pack:osx": "electron-packager ./dist \"MyApp\" --out=dist/osx --platform=darwin --arch=x64 --version=0.36.8 --icon=resources/osx/mount.icns --ignore=\"(osx|win32|win64)\" --protocol-name=\"myapp-protocol\" --protocol=\"myapp\"",
+    "pack:win32": "electron-packager ./dist \"MyApp\" --out=dist/win32 --platform=win32 --arch=ia32 --version=0.36.8 --icon=resources/win/icon.ico --ignore=\"(osx|win32|win64)\"",
+    "pack:win64": "electron-packager ./dist \"MyApp\" --out=dist/win64 --platform=win32 --arch=x64 --version=0.36.8 --icon=resources/win/icon.ico --ignore=\"(osx|win32|win64)\"",
+    "preinstaller": "npm run pack",
+    "installer": "npm run installer:osx && npm run installer:win32 && npm run installer:win64",
+    "installer:osx": "electron-builder \"dist/osx/MyApp-darwin-x64/MyApp.app\" --platform=osx --out=\"dist/osx\" --config=builder.json",
+    "installer:win32": "electron-builder \"dist/win32/MyApp-win32-ia32\" --platform=win --out=\"dist/win32\" --config=builder.json",
+    "installer:win64": "electron-builder \"dist/win64/MyApp-win32-x64\" --platform=win --out=\"dist/win64\" --config=builder.json",
+    "prearchive": "npm run installer",
+    "archive": "npm run archive:osx && npm run archive:win32 && npm run archive:win64",
+    "archive:osx": "zip -j \"dist/osx/MyApp-osx.zip\" \"dist/osx/MyApp.dmg\"",
+    "archive:win32": "zip -j \"dist/win32/MyApp-win-ia32.zip\" \"dist/win32/MyAppSetup.exe\"",
+    "archive:win64": "zip -j \"dist/win64/MyApp-win-x64.zip\" \"dist/win64/MyAppSetup.exe\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/masahirompp/electron-open-url-sample.git"
+  },
+  "author": "masahirompp",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.3",
+    "babel-preset-es2015": "^6.3.13",
+    "copy-webpack-plugin": "^1.1.1",
+    "dtsm": "^0.13.0",
+    "electron-builder": "^2.6.0",
+    "electron-packager": "^5.2.1",
+    "electron-prebuilt": "^0.36.8",
+    "ts-loader": "^0.8.0",
+    "typescript": "^1.8.0",
+    "webpack": "^1.12.13"
+  },
+  "dependencies": {}
+}
